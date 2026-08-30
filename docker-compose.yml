@@ -1,0 +1,29 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    restart: unless-stopped
+
+  # backend:  # Fase 2
+  #   build: ./backend
+  #   ports:
+  #     - "8000:8000"
+  #   environment:
+  #     DATABASE_URL: postgresql://gam:gam@db:5432/gam
+  #   depends_on:
+  #     - db
+
+  # db:       # Fase 2
+  #   image: postgres:16
+  #   environment:
+  #     POSTGRES_USER: gam
+  #     POSTGRES_PASSWORD: gam
+  #     POSTGRES_DB: gam
+  #   volumes:
+  #     - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
