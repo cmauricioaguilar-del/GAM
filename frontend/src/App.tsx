@@ -78,7 +78,7 @@ function Sidebar() {
 
 export default function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/GAM">
       <div style={{ display: 'flex', minHeight: '100vh', background: '#f1f5f9', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
         <Sidebar />
         <main style={{ marginLeft: 220, flex: 1, minHeight: '100vh', overflowX: 'hidden' }}>
