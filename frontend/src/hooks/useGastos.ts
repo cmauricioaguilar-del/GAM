@@ -11,8 +11,8 @@ function scaleItem(item: ItemGasto): ItemGasto {
     ...item,
     total_real: item.total_real / SCALE,
     total_ppto: item.total_ppto / SCALE,
-    meses: item.meses.map(m => ({ ...m, real: m.real / SCALE, ppto: m.ppto / SCALE })),
-    subitems: item.subitems.map(scaleItem)
+    meses: (item.meses ?? []).map(m => ({ ...m, real: m.real / SCALE, ppto: m.ppto / SCALE })),
+    subitems: (item.subitems ?? []).map(scaleItem)
   }
 }
 

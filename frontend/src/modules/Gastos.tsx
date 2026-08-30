@@ -38,7 +38,7 @@ function ItemRow({ item, depth = 0 }: { item: ItemGasto; depth?: number }) {
           </div>
         </td>
       </tr>
-      {open && item.subitems.map((sub, i) => (
+      {open && (item.subitems ?? []).map((sub, i) => (
         <ItemRow key={i} item={sub} depth={depth + 1} />
       ))}
     </>

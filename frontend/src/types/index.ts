@@ -8,11 +8,11 @@ export interface MesGasto {
 
 export interface ItemGasto {
   nombre: string
-  meses: MesGasto[]
+  meses?: MesGasto[]
   total_real: number
   total_ppto: number
   pct_ejecucion: number
-  subitems: ItemGasto[]
+  subitems?: ItemGasto[]
 }
 
 export interface AreaGasto {
