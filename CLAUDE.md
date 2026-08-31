@@ -190,6 +190,53 @@ docker compose down
 - Julio 2026 es el mes de datos transaccionales disponibles. Otros meses están en el consolidado.
 - El artefacto del plan de desarrollo está en: https://claude.ai/code/artifact/69f7eefd-7df0-40c6-aad2-e6491e038692
 
+## Capacidades Avanzadas — Roadmap de Funcionalidades
+
+Estas funcionalidades son equivalentes a lo que ofrece Qlik y están planificadas para Fases 2–4. Ninguna requiere cambiar el stack: todas se construyen sobre el mismo React + FastAPI + PostgreSQL.
+
+### Filtros cruzados globales (asociatividad)
+- **Qué es:** clic en un área/mes/evento filtra simultáneamente todos los gráficos del dashboard.
+- **Cómo:** store Zustand con `globalFilters: { area, mes, anio }` que todos los hooks consumen. Cada módulo reacciona al mismo estado global.
+- **Fase:** 2
+- **Prioridad:** Alta — es la capacidad más valorada en dashboards ejecutivos.
+
+### Reportes automáticos por email
+- **Qué es:** envío programado de resúmenes (ej: "Resumen mensual de ejecución presupuestaria") a la lista de directivos, sin que nadie lo genere manualmente.
+- **Cómo:** job Python (APScheduler o cron) que genera PDF con Playwright + envía por SMTP. Configuración de destinatarios y frecuencia desde la app.
+- **Fase:** 2–3
+- **Prioridad:** Media.
+
+### Alertas automáticas por umbral
+- **Qué es:** notificación cuando un KPI cruza un límite (ej: ejecución < 60% a mitad de año, o gasto > 110% del presupuesto).
+- **Cómo:** job backend que evalúa reglas configurables contra los datos actuales; notifica por email y muestra banner en la app.
+- **Fase:** 3
+- **Prioridad:** Media — muy útil para el Gerente de Finanzas sin que tenga que revisar la app activamente.
+
+### Exportación a Excel y PDF desde la app
+- **Qué es:** botón "Exportar" en cualquier vista que descarga la tabla o gráfico en el formato elegido.
+- **Cómo:** endpoint FastAPI que usa `openpyxl` (Excel) o `Playwright` (PDF). Frontend llama al endpoint y descarga el archivo.
+- **Fase:** 2
+- **Prioridad:** Alta — solicitado habitualmente por usuarios de negocio acostumbrados a Excel.
+
+### Consultas en lenguaje natural (IA)
+- **Qué es:** campo de texto libre donde el usuario escribe "¿Cuánto gastó Producción en el Q2?" y la app responde con el número y un gráfico.
+- **Cómo:** integración con Claude API (Anthropic). El backend construye el contexto con los datos actuales y envía la pregunta al LLM, que genera la consulta SQL o el JSON de respuesta.
+- **Fase:** 4
+- **Prioridad:** Media-alta — diferenciador estratégico frente a Qlik, especialmente para directivos no técnicos.
+
+### Plantillas Excel para carga de presupuesto
+- **Qué es:** archivos `.xlsx` generados por la app con la estructura exacta que el ETL espera (Área → Ítem → SubÍtem × 12 meses), para que Finanzas llene el PPTO anual sin riesgo de errores de formato.
+- **Cómo:** endpoint FastAPI que genera el Excel con `openpyxl` incluyendo validaciones de celda, listas desplegables y fórmulas de subtotal.
+- **Fase:** 2
+- **Prioridad:** Alta — necesario para el proceso de planificación PPTO 2027 (Q4 2026).
+
+---
+
+## Propuesta Comercial
+
+- Artefacto HTML interactivo (4 fichas): https://claude.ai/code/artifact/d6cb1e83-92cb-4a81-8187-ac89cf10d77d
+- Incluye: Resumen Ejecutivo PPTO-GAM vs Qlik, Flujo Operativo con SAP One, Carta Gantt desarrollo tradicional, Análisis TCO Qlik a 3 años (~$68K USD vs ~$28K USD PPTO-GAM).
+
 ## Rama de Desarrollo
 
 ```
