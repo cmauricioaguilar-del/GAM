@@ -27,6 +27,9 @@ jobs:
         run: cd frontend && npm ci
 
       - name: Build
+        env:
+          VITE_APP_USER: ${{ secrets.APP_USER }}
+          VITE_APP_PASS: ${{ secrets.APP_PASS }}
         run: cd frontend && npm run build
 
       - name: Deploy to gh-pages

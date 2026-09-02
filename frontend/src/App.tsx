@@ -3,6 +3,8 @@ import { Dashboard } from './modules/Dashboard'
 import { Gastos } from './modules/Gastos'
 import { Ingresos } from './modules/Ingresos'
 import { Ticketing } from './modules/Ticketing'
+import { LoginPage } from './components/LoginPage'
+import { useAuth } from './hooks/useAuth'
 
 const NAVY = '#0B1C2E'
 const BLUE = '#1262A8'
@@ -14,7 +16,7 @@ const navItems = [
   { path: '/ticketing', label: 'Ticketing', icon: '🎫' },
 ]
 
-function Sidebar() {
+function Sidebar({ onLogout }: { onLogout: () => void }) {
   return (
     <nav style={{
       width: 220,
@@ -68,19 +70,39 @@ function Sidebar() {
         ))}
       </div>
 
-      {/* Footer */}
-      <div style={{ padding: '16px 20px', borderTop: '1px solid rgba(255,255,255,0.08)', fontSize: 10, color: 'rgba(255,255,255,0.25)' }}>
-        GAM · 2026 · Prototipo v0.1
+      {/* Footer / Logout */}
+      <div style={{ padding: '12px 16px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+        <button
+          onClick={onLogout}
+          style={{
+            width: '100%', padding: '9px 12px',
+            background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.1)',
+            borderRadius: 8, color: 'rgba(255,255,255,0.5)',
+            fontSize: 12, cursor: 'pointer', textAlign: 'left',
+            display: 'flex', alignItems: 'center', gap: 8,
+          }}
+        >
+          <span>⬡</span> Cerrar sesión
+        </button>
+        <div style={{ fontSize: 10, color: 'rgba(255,255,255,0.2)', marginTop: 8, paddingLeft: 2 }}>
+          GAM · 2026 · v0.1
+        </div>
       </div>
     </nav>
   )
 }
 
 export default function App() {
+  const { authenticated, login, logout } = useAuth()
+
+  if (!authenticated) {
+    return <LoginPage onLogin={login} />
+  }
+
   return (
     <BrowserRouter basename="/GAM">
       <div style={{ display: 'flex', minHeight: '100vh', background: '#f1f5f9', fontFamily: 'system-ui, -apple-system, sans-serif' }}>
-        <Sidebar />
+        <Sidebar onLogout={logout} />
         <main style={{ marginLeft: 220, flex: 1, minHeight: '100vh', overflowX: 'hidden' }}>
           <Routes>
             <Route path="/" element={<Dashboard />} />
