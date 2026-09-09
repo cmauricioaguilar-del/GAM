@@ -1,0 +1,41 @@
+id,nombre,departamento,puesto,nivel,genero,experiencia_anos,salario_mensual,educacion,ubicacion,fecha_ingreso
+1,Ana García,Tecnología,Desarrollador Senior,Senior,F,8,45000,Maestría,CDMX,2016-03-15
+2,Carlos López,Ventas,Ejecutivo de Ventas,Junior,M,2,18000,Licenciatura,Monterrey,2022-01-10
+3,María Rodríguez,Recursos Humanos,Gerente RRHH,Gerente,F,12,55000,Maestría,CDMX,2012-07-20
+4,José Martínez,Tecnología,Desarrollador Junior,Junior,M,1,22000,Licenciatura,Guadalajara,2023-02-01
+5,Laura Hernández,Finanzas,Analista Financiero,Semi-Senior,F,5,32000,Licenciatura,CDMX,2019-05-14
+6,Roberto Sánchez,Tecnología,Arquitecto de Software,Senior,M,10,65000,Maestría,CDMX,2014-08-30
+7,Patricia Torres,Marketing,Coordinadora de Marketing,Semi-Senior,F,6,30000,Licenciatura,Monterrey,2018-11-22
+8,Miguel Flores,Ventas,Director de Ventas,Director,M,15,90000,Maestría,CDMX,2009-04-05
+9,Sofía Ramírez,Finanzas,CFO,Director,F,18,120000,Doctorado,CDMX,2006-01-15
+10,David Jiménez,Tecnología,DevOps Engineer,Senior,M,7,48000,Licenciatura,Guadalajara,2017-09-12
+11,Isabella Morales,Recursos Humanos,Reclutadora,Junior,F,2,20000,Licenciatura,CDMX,2022-06-01
+12,Alejandro Castro,Marketing,Director de Marketing,Director,M,16,95000,Maestría,Monterrey,2008-03-18
+13,Valentina Ruiz,Tecnología,QA Engineer,Semi-Senior,F,4,28000,Licenciatura,CDMX,2020-08-25
+14,Fernando Vargas,Finanzas,Contador,Semi-Senior,M,5,30000,Licenciatura,Guadalajara,2019-03-10
+15,Camila Díaz,Ventas,Ejecutiva de Ventas,Semi-Senior,F,4,24000,Licenciatura,CDMX,2020-11-05
+16,Andrés Mendoza,Tecnología,CTO,Director,M,20,150000,Doctorado,CDMX,2004-05-22
+17,Lucía Ortega,Recursos Humanos,Directora RRHH,Director,F,17,100000,Maestría,CDMX,2007-09-14
+18,Diego Reyes,Marketing,Analista de Marketing,Junior,M,2,19000,Licenciatura,Guadalajara,2022-04-18
+19,Natalia Vega,Tecnología,Data Scientist,Senior,F,8,52000,Maestría,CDMX,2016-07-11
+20,Emilio Guerrero,Finanzas,Gerente Financiero,Gerente,M,11,70000,Maestría,Monterrey,2013-12-03
+21,Renata Peña,Ventas,Gerente de Ventas,Gerente,F,9,62000,Licenciatura,CDMX,2015-06-28
+22,Sebastián Aguilar,Tecnología,Desarrollador Senior,Senior,M,7,43000,Licenciatura,Guadalajara,2017-02-14
+23,Mariana Cruz,Marketing,Especialista SEO,Semi-Senior,F,5,27000,Licenciatura,CDMX,2019-10-07
+24,Rodrigo Herrera,Finanzas,Analista Junior,Junior,M,1,21000,Licenciatura,CDMX,2023-08-01
+25,Daniela Fuentes,Tecnología,Product Manager,Gerente,F,10,75000,Maestría,CDMX,2014-11-19
+26,Alberto Navarro,Recursos Humanos,Especialista Nómina,Semi-Senior,M,6,32000,Licenciatura,Monterrey,2018-07-30
+27,Gabriela Paredes,Ventas,Ejecutiva Senior,Senior,F,8,38000,Licenciatura,CDMX,2016-05-16
+28,Eduardo Medina,Marketing,Gerente de Marketing,Gerente,M,12,68000,Maestría,Guadalajara,2012-10-25
+29,Adriana Romero,Tecnología,UX/UI Designer,Semi-Senior,F,5,35000,Licenciatura,CDMX,2019-01-08
+30,Javier Acosta,Finanzas,Director Financiero,Director,M,19,115000,Doctorado,CDMX,2005-08-12
+31,Fernanda Ibarra,Tecnología,Backend Developer,Senior,F,8,46000,Licenciatura,Monterrey,2016-12-04
+32,Marcos Palacios,Recursos Humanos,Analista RRHH,Junior,M,2,19500,Licenciatura,CDMX,2022-09-20
+33,Verónica Espinosa,Ventas,Directora de Ventas,Director,F,18,88000,Maestría,CDMX,2006-11-30
+34,Nicolás Delgado,Marketing,Creativo Senior,Senior,M,9,40000,Licenciatura,CDMX,2015-04-17
+35,Karla Montoya,Tecnología,Desarrollador Full Stack,Senior,F,7,44000,Maestría,Guadalajara,2017-06-09
+36,Óscar Cabrera,Finanzas,Especialista Impuestos,Senior,M,9,42000,Licenciatura,CDMX,2015-09-22
+37,Samantha Gutiérrez,Recursos Humanos,Gerente Compensaciones,Gerente,F,13,72000,Maestría,CDMX,2011-03-07
+38,Mauricio Villanueva,Ventas,Ejecutivo Junior,Junior,M,1,17000,Licenciatura,Monterrey,2023-05-15
+39,Elena Bautista,Tecnología,ML Engineer,Senior,F,9,58000,Maestría,CDMX,2015-07-28
+40,Gerardo Fuente,Marketing,Director de Contenido,Gerente,M,11,65000,Maestría,CDMX,2013-08-13
