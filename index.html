@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <title>LideraMujer</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Somos una consultora estratégica en transformaciones organizacionales. Entregamos servicios para apoyar los cambios culturales que necesitas.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,600&family=Outfit:wght@300;400;500;600&display=swap">
+  <style>
+    /* === TOKENS === */
+    :root {
+      --violet:      #6e1773;
+      --violet-mid:  #8e2a94;
+      --violet-pale: #f0e8f1;
+      --orange:      #f76a0c;
+      --teal:        #1a7a70;
+      --teal-light:  #0d9488;
+      --ink:         #1c1332;
+      --mist:        #5a5270;
+      --rule:        #e4dded;
+      --ground:      #ffffff;
+      --surface:     #f8f7fb;
+      --nav-h:       72px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --violet-pale: #1e1430;
+        --ink:         #ede6f5;
+        --mist:        #b0a8c8;
+        --rule:        #2e2848;
+        --ground:      #0f0a1e;
+        --surface:     #18122e;
+      }
+    }
+    :root[data-theme="dark"] {
+      --violet-pale: #1e1430;
+      --ink:         #ede6f5;
+      --mist:        #b0a8c8;
+      --rule:        #2e2848;
+      --ground:      #0f0a1e;
+      --surface:     #18122e;
+    }
+
+    /* === RESET === */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Outfit', system-ui, sans-serif;
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--ink);
+      background: var(--ground);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    ul { list-style: none; }
+    button { cursor: pointer; border: none; background: none; font: inherit; }
+    address { font-style: normal; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+    }
+
+    /* === LAYOUT === */
+    .wrap {
+      width: 100%;
+      max-width: 1260px;
+      margin-inline: auto;
+      padding-inline: 48px;
+    }
+    @media (max-width: 768px) { .wrap { padding-inline: 20px; } }
+
+    /* === TYPOGRAPHY === */
+    h1, h2, h3, h4 {
+      font-family: 'Fraunces', Georgia, serif;
+      font-weight: 600;
+      line-height: 1.1;
+      text-wrap: balance;
+      color: var(--ink);
+    }
+    .eyebrow {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--violet);
+    }
+
+    /* === TOP ACCENT BAR === */
+    .top-bar {
+      height: 4px;
+      background: linear-gradient(90deg, var(--violet) 0%, var(--orange) 50%, var(--teal) 100%);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 200;
+    }
+
+    /* === NAVBAR === */
+    .nav {
+      position: fixed;
+      top: 4px;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      background: var(--ground);
+      border-bottom: 1px solid var(--rule);
+      display: flex;
+      align-items: center;
+    }
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      max-width: 1260px;
+      margin-inline: auto;
+      padding-inline: 48px;
+      gap: 2rem;
+    }
+    .nav__logo { flex-shrink: 0; display: flex; align-items: center; }
+    .nav__logo img { height: 42px; width: auto; }
+    .nav__logo-text {
+      font-family: 'Fraunces', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--violet);
+      display: none;
+    }
+    .nav__links {
+      display: flex;
+      gap: 1.75rem;
+      margin-left: auto;
+      margin-right: 1.5rem;
+    }
+    .nav__links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--mist);
+      white-space: nowrap;
+      transition: color 0.18s;
+      padding-block: 4px;
+      border-bottom: 2px solid transparent;
+    }
+    .nav__links a:hover { color: var(--ink); }
+    .nav__links a.active { color: var(--violet); border-bottom-color: var(--violet); }
+    .nav__cta {
+      flex-shrink: 0;
+      padding: 0.5rem 1.35rem;
+      border: 1.5px solid var(--violet);
+      border-radius: 2px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--violet);
+      letter-spacing: 0.02em;
+      transition: background 0.18s, color 0.18s;
+    }
+    .nav__cta:hover { background: var(--violet); color: #fff; }
+    .nav__toggler {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      margin-left: auto;
+      padding: 6px;
+    }
+    .nav__toggler span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 1px; transition: transform 0.2s, opacity 0.2s; }
+    @media (max-width: 860px) {
+      .nav__links { display: none; }
+      .nav__cta.desktop { display: none; }
+      .nav__toggler { display: flex; }
+      .nav--open .nav__links {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: calc(var(--nav-h) + 4px);
+        left: 0; right: 0; bottom: 0;
+        background: var(--ground);
+        padding: 2.5rem 48px;
+        gap: 0;
+        border-top: 1px solid var(--rule);
+        overflow-y: auto;
+      }
+      .nav--open .nav__links a {
+        font-size: 1.1rem;
+        padding-block: 1rem;
+        border-bottom: 1px solid var(--rule);
+        border-bottom-width: 1px !important;
+      }
+      .nav--open .nav__cta.mobile {
+        display: inline-flex;
+        margin-top: 2rem;
+        align-self: flex-start;
+      }
+    }
+    @media (max-width: 768px) {
+      .nav__inner { padding-inline: 20px; }
+      .nav--open .nav__links { padding-inline: 20px; }
+    }
+    .nav__cta.mobile { display: none; }
+
+    /* === MAIN OFFSET === */
+    main { padding-top: calc(var(--nav-h) + 4px); }
+
+    /* === HERO === */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: calc(88vh - var(--nav-h));
+      overflow: hidden;
+    }
+    .hero__visual {
+      position: relative;
+      overflow: hidden;
+      background: var(--surface);
+    }
+    .hero__svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .hero__content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 48px 80px 64px;
+    }
+    .hero__eyebrow { margin-bottom: 1.75rem; }
+    .hero__title {
+      font-size: clamp(2rem, 3.5vw, 3.25rem);
+      margin-bottom: 1.25rem;
+      max-width: 520px;
+    }
+    .hero__sub {
+      font-size: 1.05rem;
+      color: var(--mist);
+      max-width: 460px;
+      margin-bottom: 3rem;
+      line-height: 1.75;
+    }
+    .hero__services { display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 3rem; }
+    .hero__svc { display: flex; gap: 1rem; align-items: flex-start; }
+    .hero__dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--violet);
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+    .hero__dot--o { background: var(--orange); }
+    .hero__dot--t { background: var(--teal); }
+    .hero__svc-name { font-weight: 600; font-size: 0.95rem; color: var(--ink); }
+    .hero__svc-desc { font-size: 0.85rem; color: var(--mist); margin-top: 0.2rem; line-height: 1.6; }
+    .hero__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--violet);
+      padding-bottom: 2px;
+      border-bottom: 1px solid var(--violet);
+      transition: gap 0.2s;
+    }
+    .hero__link:hover { gap: 0.8rem; }
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero__visual { min-height: 240px; order: 1; }
+      .hero__content { order: 2; padding: 56px 20px 60px; }
+      .hero__title { font-size: clamp(1.8rem, 5vw, 2.8rem); }
+    }
+
+    /* === SERVICES === */
+    .services {
+      padding-block: 96px;
+      background: var(--surface);
+      border-top: 1px solid var(--rule);
+    }
+    .services__head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 3.5rem;
+    }
+    .services__title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.4rem, 2vw, 1.875rem);
+      color: var(--ink);
+    }
+    .services__grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+    .svc-card {
+      padding: 2.5rem 2.5rem 2.5rem 0;
+      border-top: 3px solid var(--violet);
+    }
+    .svc-card + .svc-card {
+      padding-left: 2.5rem;
+      border-left: 1px solid var(--rule);
+    }
+    .svc-card__bar {
+      width: 28px;
+      height: 3px;
+      border-radius: 2px;
+      background: var(--violet);
+      margin-bottom: 1.75rem;
+    }
+    .svc-card__bar--o { background: var(--orange); }
+    .svc-card__bar--t { background: var(--teal); }
+    .svc-card__bar--o + h3, .svc-card__bar--t + h3 {}
+    .svc-card h3 { font-size: 1.2rem; margin-bottom: 0.75rem; }
+    .svc-card p { font-size: 0.9rem; color: var(--mist); line-height: 1.75; }
+    @media (max-width: 760px) {
+      .services__grid { grid-template-columns: 1fr; }
+      .svc-card { padding: 2rem 0; border-left: none !important; }
+      .svc-card + .svc-card { padding-left: 0; }
+    }
+
+    /* === FUNDAMENTO === */
+    .fundamento {
+      background: var(--violet-pale);
+      padding-block: 96px;
+    }
+    .fundamento__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .fundamento__left .eyebrow { margin-bottom: 1.5rem; }
+    .fundamento__left h2 { font-size: clamp(1.6rem, 2.5vw, 2.25rem); }
+    .fundamento__right p {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.15rem, 1.8vw, 1.6rem);
+      font-style: italic;
+      color: var(--mist);
+      line-height: 1.45;
+    }
+    .fundamento__arrow {
+      display: block;
+      margin-top: 2.5rem;
+      font-size: 1.25rem;
+      color: var(--violet);
+    }
+    @media (max-width: 700px) {
+      .fundamento__inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    /* === PUBLICATION === */
+    .publication {
+      padding-block: 96px;
+      border-top: 1px solid var(--rule);
+    }
+    .publication__inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .publication__left .eyebrow { margin-bottom: 1rem; }
+    .publication__left h3 {
+      font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+      margin-bottom: 1rem;
+    }
+    .publication__left p { font-size: 0.9rem; color: var(--mist); line-height: 1.75; }
+    .publication__left .pub-alllink {
+      display: inline-block;
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--violet);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .pub-form { display: flex; flex-direction: column; gap: 1rem; }
+    .pub-form__row { display: flex; gap: 1rem; }
+    .pub-form input {
+      flex: 1;
+      width: 100%;
+      padding: 0.875rem 1rem;
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      font: inherit;
+      font-size: 0.9rem;
+      background: var(--ground);
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.18s;
+    }
+    .pub-form input:focus { border-color: var(--violet); }
+    .pub-form input::placeholder { color: var(--mist); opacity: 0.7; }
+    .pub-form__btn {
+      padding: 0.9rem 2rem;
+      background: var(--violet);
+      color: #fff;
+      border-radius: 2px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      letter-spacing: 0.03em;
+      transition: opacity 0.18s;
+      align-self: flex-start;
+    }
+    .pub-form__btn:hover { opacity: 0.85; }
+    .pub-success {
+      display: none;
+      padding: 1rem 1.25rem;
+      background: var(--violet-pale);
+      border-left: 3px solid var(--violet);
+      font-size: 0.9rem;
+      color: var(--violet);
+      border-radius: 0 2px 2px 0;
+    }
+    .pub-success.shown { display: block; }
+    @media (max-width: 700px) {
+      .publication__inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .pub-form__row { flex-direction: column; }
+    }
+
+    /* === ACTUALIDAD === */
+    .actualidad {
+      padding-block: 96px;
+      background: var(--surface);
+      border-top: 1px solid var(--rule);
+    }
+    .actualidad__head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 3rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--rule);
+    }
+    .actualidad__title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.4rem, 2vw, 1.875rem);
+    }
+    .actualidad__link {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--violet);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: gap 0.18s;
+    }
+    .actualidad__link:hover { gap: 0.6rem; }
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      background: var(--rule);
+    }
+    .news-card {
+      background: var(--ground);
+      display: flex;
+      flex-direction: column;
+    }
+    .news-card__img {
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      background: var(--rule);
+    }
+    .news-card__img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.45s ease;
+    }
+    .news-card:hover .news-card__img img { transform: scale(1.05); }
+    .news-card__body { padding: 1.5rem 1.5rem 2rem; flex: 1; display: flex; flex-direction: column; }
+    .news-card__cat {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 0.75rem;
+    }
+    .news-card h4 {
+      font-family: 'Fraunces', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--ink);
+      flex: 1;
+    }
+    .news-card h4 a { transition: color 0.18s; }
+    .news-card h4 a:hover { color: var(--violet); }
+    @media (max-width: 760px) {
+      .news-grid { grid-template-columns: 1fr; }
+    }
+
+    /* === FOOTER === */
+    .footer {
+      background: var(--ink);
+      padding-block: 64px 40px;
+    }
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 60px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 2rem;
+    }
+    .footer__logo {
+      margin-bottom: 1.25rem;
+      display: flex;
+      align-items: center;
+    }
+    .footer__logo img {
+      height: 44px;
+      width: auto;
+      filter: brightness(0) invert(1);
+    }
+    .footer__logo-text {
+      font-family: 'Fraunces', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #fff;
+    }
+    .footer__tagline {
+      font-family: 'Fraunces', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: rgba(240,232,241,0.45);
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+    .footer__social-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--violet-mid);
+      margin-bottom: 0.875rem;
+    }
+    .footer__social { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+    .footer__social a {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.18s, background 0.18s;
+    }
+    .footer__social a:hover {
+      border-color: var(--violet-mid);
+      background: rgba(110,23,115,0.25);
+    }
+    .footer__social svg { fill: rgba(255,255,255,0.7); width: 14px; height: 14px; }
+    .footer__contact h5 {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--violet-mid);
+      margin-bottom: 1.25rem;
+    }
+    .footer__address {
+      font-size: 0.9rem;
+      line-height: 1.9;
+      color: rgba(240,232,241,0.5);
+    }
+    .footer__address a { color: rgba(240,232,241,0.7); transition: color 0.18s; }
+    .footer__address a:hover { color: #fff; }
+    .footer__bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      font-size: 0.78rem;
+      color: rgba(240,232,241,0.3);
+    }
+    @media (max-width: 700px) {
+      .footer__grid { grid-template-columns: 1fr; gap: 3rem; }
+      .footer__bottom { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="top-bar"></div>
+
+  <!-- NAVBAR -->
+  <nav class="nav" id="nav" role="navigation" aria-label="Navegación principal">
+    <div class="nav__inner" id="navInner">
+      <a href="#inicio" class="nav__logo" aria-label="LideraMujer — Inicio">
+        <img
+          src="https://www.lideramujer.org/wp-content/blogs.dir/18/files/sites/18/2021/07/logo-lidera-mujer-color.png"
+          alt="LideraMujer"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+        >
+        <span class="nav__logo-text" style="display:none">LideraMujer</span>
+      </a>
+      <ul class="nav__links" id="navLinks">
+        <li><a href="#inicio" class="active">Inicio</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#sobre">Sobre LideraMujer</a></li>
+        <li><a href="#publicaciones">Publicaciones</a></li>
+        <li><a href="#actualidad">Actualidad</a></li>
+        <a href="#contacto" class="nav__cta mobile" tabindex="-1">Contacto</a>
+      </ul>
+      <a href="#contacto" class="nav__cta desktop">Contacto</a>
+      <button class="nav__toggler" id="navToggler" aria-label="Abrir menú" aria-expanded="false" aria-controls="navLinks">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- HERO -->
+    <section class="hero" id="inicio" aria-label="Inicio">
+      <div class="hero__visual" aria-hidden="true">
+        <svg class="hero__svg" viewBox="0 0 560 740" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+          <!-- Teal — upper right -->
+          <path d="M 280 -40 C 400 -60 520 40 500 200 C 480 360 360 420 240 380 C 120 340 100 220 160 120 C 220 20 160 -20 280 -40 Z" fill="#1a7a70"/>
+          <!-- Violet — center -->
+          <path d="M 60 120 C 120 40 260 60 300 200 C 340 340 260 460 140 460 C 20 460 -40 360 -20 240 C 0 120 0 200 60 120 Z" fill="#6e1773"/>
+          <!-- Orange — lower left -->
+          <path d="M -40 420 C -20 280 80 200 200 220 C 320 240 360 360 320 500 C 280 640 140 700 40 660 C -60 620 -60 560 -40 420 Z" fill="#f76a0c"/>
+          <!-- Small teal — lower right -->
+          <path d="M 380 500 C 440 460 520 500 520 580 C 520 660 460 700 380 680 C 300 660 280 580 380 500 Z" fill="#0d9488"/>
+          <!-- Orange warm accent — top right -->
+          <ellipse cx="490" cy="100" rx="60" ry="45" fill="#f76a0c" opacity="0.35" transform="rotate(-30 490 100)"/>
+        </svg>
+      </div>
+
+      <div class="hero__content">
+        <p class="eyebrow hero__eyebrow">Consultora Estratégica · Santiago, Chile</p>
+        <h1 class="hero__title">Somos una consultora estratégica en transformaciones organizacionales</h1>
+        <p class="hero__sub">Entregamos servicios que buscan intervenir para apoyar los cambios de paradigmas culturales dentro de la organización.</p>
+        <ul class="hero__services">
+          <li class="hero__svc">
+            <div class="hero__dot"></div>
+            <div>
+              <div class="hero__svc-name">Formación para el cambio</div>
+              <div class="hero__svc-desc">Intervenciones y procesos diseñados desde las personas, adaptados a las diversas realidades organizacionales.</div>
+            </div>
+          </li>
+          <li class="hero__svc">
+            <div class="hero__dot hero__dot--o"></div>
+            <div>
+              <div class="hero__svc-name">Estudios e investigación</div>
+              <div class="hero__svc-desc">Apoyo multidisciplinario para levantar data en temas relevantes para la toma de decisiones.</div>
+            </div>
+          </li>
+          <li class="hero__svc">
+            <div class="hero__dot hero__dot--t"></div>
+            <div>
+              <div class="hero__svc-name">Asesorías</div>
+              <div class="hero__svc-desc">Acompañamiento estratégico y humano para potenciar el aprendizaje y el cambio organizacional.</div>
+            </div>
+          </li>
+        </ul>
+        <a href="#servicios" class="hero__link">
+          Conoce nuestros servicios y metodología
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+      </div>
+    </section>
+
+    <!-- SERVICIOS -->
+    <section class="services" id="servicios" aria-labelledby="svc-heading">
+      <div class="wrap">
+        <div class="services__head">
+          <h2 class="services__title" id="svc-heading">Áreas en las que trabajamos</h2>
+        </div>
+        <div class="services__grid">
+          <div class="svc-card">
+            <div class="svc-card__bar"></div>
+            <h3>Formación para el cambio</h3>
+            <p>Generación de intervenciones y procesos de formación diseñados desde las personas, adaptado a las diversas realidades organizacionales. Desarrollamos programas que transforman culturas desde adentro.</p>
+          </div>
+          <div class="svc-card">
+            <div class="svc-card__bar svc-card__bar--o"></div>
+            <h3>Estudios e investigación</h3>
+            <p>Apoyo de nuestro equipo multidisciplinario para estudios e investigaciones que busquen levantar data en temas relevantes para la toma de decisiones. Investigamos con rigurosidad y perspectiva de género.</p>
+          </div>
+          <div class="svc-card">
+            <div class="svc-card__bar svc-card__bar--t"></div>
+            <h3>Asesorías</h3>
+            <p>Apoyo y acompañamiento para potenciar procesos de aprendizaje, cambio y nuevas perspectivas en la organización, desde una mirada estratégica y humana. Trabajamos junto a tu equipo, no para tu equipo.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FUNDAMENTO -->
+    <section class="fundamento" id="sobre" aria-labelledby="fund-heading">
+      <div class="wrap">
+        <div class="fundamento__inner">
+          <div class="fundamento__left">
+            <p class="eyebrow">Fundamento</p>
+            <h2 id="fund-heading">Construimos relaciones virtuosas que permitan generar las transformaciones necesarias para el futuro</h2>
+          </div>
+          <div class="fundamento__right">
+            <p>Trabajamos desde una mirada sistémica, colaborativa y desde el diseño centrado en las personas</p>
+            <span class="fundamento__arrow" aria-hidden="true">↓</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PUBLICACIÓN DESTACADA -->
+    <section class="publication" id="publicaciones" aria-labelledby="pub-heading">
+      <div class="wrap">
+        <div class="publication__inner">
+          <div class="publication__left">
+            <p class="eyebrow">Publicación destacada</p>
+            <h3 id="pub-heading">Guía de buenas prácticas para un lenguaje no sexista</h3>
+            <p>Esta guía fue realizada como respuesta a la necesidad de adaptación y generación de culturas laborales inclusivas. Con el objetivo de promover la igualdad de género y no discriminación a partir del lenguaje, ya que desde este se crean realidades.</p>
+            <a href="https://www.lideramujer.org/publicaciones/" class="pub-alllink" target="_blank" rel="noopener">Ver todas las publicaciones →</a>
+          </div>
+          <div>
+            <form class="pub-form" id="pubForm" novalidate>
+              <div class="pub-form__row">
+                <input type="text" id="pubName" name="name" placeholder="Nombre" autocomplete="given-name" required>
+                <input type="email" id="pubEmail" name="email" placeholder="Correo electrónico" autocomplete="email" required>
+              </div>
+              <button type="submit" class="pub-form__btn">Enviar guía</button>
+            </form>
+            <div class="pub-success" id="pubSuccess" role="status" aria-live="polite">
+              El documento ha sido enviado exitosamente. ¡Gracias!
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACTUALIDAD -->
+    <section class="actualidad" id="actualidad" aria-labelledby="news-heading">
+      <div class="wrap">
+        <div class="actualidad__head">
+          <h2 class="actualidad__title" id="news-heading">Actualidad</h2>
+          <a href="https://www.lideramujer.org/noticias/" class="actualidad__link" target="_blank" rel="noopener">
+            Ver todo
+            <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+              <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+        </div>
+        <div class="news-grid">
+          <article class="news-card">
+            <div class="news-card__img">
+              <img
+                src="https://www.lideramujer.org/wp-content/blogs.dir/18/files/sites/18/2025/04/Post-Pagina-web-4-768x432.png"
+                alt="Estereotipos de Género en Negociación"
+                loading="lazy"
+                width="768" height="432"
+              >
+            </div>
+            <div class="news-card__body">
+              <span class="news-card__cat">Blog</span>
+              <h4><a href="https://www.lideramujer.org/2025/04/03/conociendo-mas-acerca-de-estereotipos-de-genero-en-negociacion-y-algunas-sugerencias-para-ellas/" target="_blank" rel="noopener">Conociendo más acerca de Estereotipos de Género en Negociación y algunas sugerencias para ellas</a></h4>
+            </div>
+          </article>
+          <article class="news-card">
+            <div class="news-card__img">
+              <img
+                src="https://www.lideramujer.org/wp-content/blogs.dir/18/files/sites/18/2025/03/Post-Pagina-web-3-1-768x432.png"
+                alt="Coaching Ejecutivo para un Liderazgo Resiliente"
+                loading="lazy"
+                width="768" height="432"
+              >
+            </div>
+            <div class="news-card__body">
+              <span class="news-card__cat">Noticias</span>
+              <h4><a href="https://www.lideramujer.org/2025/03/05/lideramujer-presenta-coaching-ejecutivo-para-un-liderazgo-resiliente-en-el-nuevo-marco-laboral/" target="_blank" rel="noopener">LideraMujer presenta: Coaching Ejecutivo para un Liderazgo Resiliente en el Nuevo Marco Laboral</a></h4>
+            </div>
+          </article>
+          <article class="news-card">
+            <div class="news-card__img">
+              <img
+                src="https://www.lideramujer.org/wp-content/blogs.dir/18/files/sites/18/2025/02/Post-Pagina-web-2-768x432.png"
+                alt="Mujeres lideran denuncias por violencia laboral"
+                loading="lazy"
+                width="768" height="432"
+              >
+            </div>
+            <div class="news-card__body">
+              <span class="news-card__cat">Blog</span>
+              <h4><a href="https://www.lideramujer.org/2025/02/28/mujeres-lideran-denuncias-por-violencia-laboral-bajo-la-ley-karin/" target="_blank" rel="noopener">Mujeres lideran denuncias por violencia laboral bajo la Ley Karin</a></h4>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer" id="contacto" aria-label="Pie de página">
+    <div class="wrap">
+      <div class="footer__grid">
+        <div>
+          <div class="footer__logo">
+            <img
+              src="https://www.lideramujer.org/wp-content/blogs.dir/18/files/sites/18/2021/07/Logo-Fondo-Blanco-y-Bordes.png"
+              alt="LideraMujer"
+              onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+            >
+            <span class="footer__logo-text" style="display:none">LideraMujer</span>
+          </div>
+          <p class="footer__tagline">Consultora estratégica en transformaciones organizacionales</p>
+          <p class="footer__social-label">Síguenos</p>
+          <ul class="footer__social" aria-label="Redes sociales">
+            <li>
+              <a href="https://www.linkedin.com/company/consultora-lideramujer/" target="_blank" rel="noopener" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com/lidera_mujer" target="_blank" rel="noopener" aria-label="Twitter / X">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.735l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/ConsultoraLideraMujer" target="_blank" rel="noopener" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/consultora_lideramujer/" target="_blank" rel="noopener" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" fill="none" stroke="rgba(255,255,255,0.7)" stroke-width="2"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" stroke="rgba(255,255,255,0.7)" stroke-width="2" stroke-linecap="round"/></svg>
+              </a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com/channel/UCSgKRKRB67lYi3AkSdtGjtQ" target="_blank" rel="noopener" aria-label="YouTube">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.95C18.88 4 12 4 12 4s-6.88 0-8.59.47a2.78 2.78 0 0 0-1.95 1.95A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" style="fill:#0f0a1e"/></svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer__contact">
+          <h5>Contacto</h5>
+          <address class="footer__address">
+            Avenida Providencia 1208, oficinas 207<br>
+            Santiago, Chile<br><br>
+            <a href="mailto:contacto@lideramujer.org">contacto@lideramujer.org</a>
+          </address>
+        </div>
+      </div>
+      <div class="footer__bottom">
+        <span>© 2025 LideraMujer. Todos los derechos reservados.</span>
+        <span>consultoralidera.cl</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ── Mobile nav ──────────────────────────────────────────────
+    const nav     = document.getElementById('nav');
+    const toggler = document.getElementById('navToggler');
+    const navLinks = document.getElementById('navLinks');
+
+    toggler.addEventListener('click', function () {
+      const isOpen = nav.classList.toggle('nav--open');
+      toggler.setAttribute('aria-expanded', String(isOpen));
+    });
+    navLinks.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        nav.classList.remove('nav--open');
+        toggler.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // ── Active nav link on scroll ───────────────────────────────
+    const sections = document.querySelectorAll('section[id], footer[id]');
+    const links    = document.querySelectorAll('.nav__links a[href^="#"]');
+    const observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          links.forEach(function (l) { l.classList.remove('active'); });
+          const active = document.querySelector('.nav__links a[href="#' + entry.target.id + '"]');
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    sections.forEach(function (s) { observer.observe(s); });
+
+    // ── Publication form ────────────────────────────────────────
+    document.getElementById('pubForm').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var name  = document.getElementById('pubName').value.trim();
+      var email = document.getElementById('pubEmail').value.trim();
+      if (!name || !email) return;
+      this.style.display = 'none';
+      document.getElementById('pubSuccess').classList.add('shown');
+    });
+  </script>
+
+</body>
+</html>
